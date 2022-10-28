@@ -6,12 +6,14 @@ const MemorySchema = mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: User,
   },
-  question: {
+  name: {
     type: String,
     required: true,
   },
-  answer: {
+  location: {
     type: String,
-    required: true,
   },
+  description: String,
 });
+
+module.exports = mongoose.model("Memory", MemorySchema);

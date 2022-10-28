@@ -5,7 +5,7 @@ const { protect } = require("../middleware/jwtCheck");
 
 router.get("/:id", protect, async (req, res) => {
   try {
-    const memory = await Service.findById(req.params.id).populate("user");
+    const memory = await Memory.findById(req.params.id).populate("user");
     res.status(200).json(memory);
   } catch (error) {
     console.error(error.message);
@@ -15,7 +15,7 @@ router.get("/:id", protect, async (req, res) => {
 
 router.get("/", protect, async (req, res) => {
   try {
-    const memories = await Service.find().populate("user");
+    const memories = await Memory.find().populate("user");
     res.status(200).json(memories);
   } catch (error) {
     console.error(error.message);
@@ -25,11 +25,12 @@ router.get("/", protect, async (req, res) => {
 
 router.post("/", protect, async (req, res) => {
   try {
-    const { question, answer } = req.body;
+    const { name, location, description } = req.body;
 
     let memory = new Memory({
-      question,
-      answer,
+      name,
+      location,
+      description,
       user: req.user.id,
     });
 
@@ -44,7 +45,7 @@ router.post("/", protect, async (req, res) => {
 
 router.delete("/:id", protect, async (req, res) => {
   try {
-    await Service.findByIdAndDelete(req.params.id);
+    await Memory.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
       message: "The service has been deleted",
