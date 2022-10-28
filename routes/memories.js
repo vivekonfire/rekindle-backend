@@ -27,11 +27,13 @@ router.post("/", protect, async (req, res) => {
   try {
     const { name, location, description } = req.body;
 
+    console.log(req);
+
     let memory = new Memory({
       name,
       location,
       description,
-      user: req.user.id,
+      user: req.user._id,
     });
 
     await memory.save();

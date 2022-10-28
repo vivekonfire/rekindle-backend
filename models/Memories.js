@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = require("./User");
 
 const MemorySchema = mongoose.Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.ObjectId,
     ref: User,
   },
